@@ -1,122 +1,83 @@
-这一讲，我们来实现 Wtfswap 的 Layout 头部部分的 UI。
+# WTF-Dapp
 
----
+WTF Dapp 是一个 DApp 极简入门教程，帮助开发者入门去中心应用开发。
 
-设计稿如下所示：
+## 基础
 
-![headui](./img/ui.png)
+**第 1 讲：快速开始（三分钟展示 NFT）**：[教程](./01_QuickStart/readme.md) | [代码](./01_QuickStart/web3.tsx)
 
-样式比较简单，右侧我们可以使用 Ant Design Web3 的 [ConnectButton](https://web3.ant.design/components/connect-button) 组件，其它部分可以直接用些样式，样式我们基于 [CSSModules](https://nextjs.org/docs/app/building-your-application/styling/css-modules#css-modules) 来写，NextJS 默认支持，而且更好理解，比较适合课程中使用。当然实际项目中你也可以按照你的需求使用[其它方案](https://nextjs.org/docs/app/building-your-application/styling)。
+**第 2 讲：节点服务**：[教程](./02_NodeService/readme.md) | [代码](./02_NodeService/web3.tsx)
 
-我们新建 `components/WtfLayout/styles.module.css`，并初始化部分内容：
+**第 3 讲：连接钱包**：[教程](./03_ConnectWallet/readme.md) | [代码](./03_ConnectWallet/web3.tsx)
 
-```css
-.header {
-  .title {
-  }
-  .nav {
-  }
-}
-```
+**第 4 讲：调用合约**：[教程](./04_CallContract/readme.md) | [代码](./04_CallContract/web3.tsx)
 
-稍后我们再来补充相关内容，在这之前先修改 `Header.tsx`：
+**第 5 讲：监听事件**：[教程](./05_Events/readme.md) | [代码](./05_Events/web3.tsx)
 
-```tsx
-import Link from "next/link";
-import { ConnectButton } from "@ant-design/web3";
-import styles from "./styles.module.css";
+**第 6 讲：Next.js 部署**：[教程](./06_NextJS/readme.md)
 
-export default function WtfHeader() {
-  return (
-    <div className={styles.header}>
-      <div className={styles.title}>WTFSwap</div>
-      <div className={styles.nav}>
-        <Link href="/wtfswap">Swap</Link>
-        <Link href="/wtfswap/pool">Pool</Link>
-      </div>
-      <div>
-        <ConnectButton type="text" />
-      </div>
-    </div>
-  );
-}
-```
+**第 7 讲：合约开发和测试**：[教程](./07_ContractDev/readme.md) | [代码](./07_ContractDev/MyToken.sol)
 
-这里用了 [Link](https://nextjs.org/learn-pages-router/basics/navigate-between-pages/link-component) 组件来实现页面的跳转。另外引入了 [ConnectButton](https://web3.ant.design/components/connect-button) 组件，并设置了 `type` 为 `text`，以匹配设计稿的样式。
+**第 8 讲：合约部署**：[教程](./08_ContractDeploy/readme.md) | [代码](./08_ContractDeploy/demo/dapp.tsx)
 
-接下来我们继续完善 `styles.module.csss` 中的样式：
+## 进阶
 
-```css
-.header {
-  height: 56px;
-  line-height: 56px;
-  padding-inline: 24px;
-  background-color: #e8f1ff;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+**第 9 讲：EIP1193 和 EIP6963**：[教程](./09_EIP1193/readme.md) | [代码](./09_EIP1193/web3.tsx)
 
-.title {
-  font-size: 16px;
-  font-weight: bold;
-}
+**第 10 讲：通过 WalletConnect 连接移动端钱包**：[教程](./10_WalletConnect/readme.md) | [代码](./10_WalletConnect/web3.tsx)
 
-.nav {
-  display: flex;
-  gap: 64px;
-}
+**第 11 讲：支持多链**：[教程](./11_MultipleChain/readme.md) | [代码](./11_MultipleChain/web3.tsx)
 
-.nav a {
-  font-size: 14px;
-  opacity: 0.65;
-}
-```
+**第 12 讲：签名和验签**：[教程](./12_Signature/readme.md) | [代码](./demo/pages/sign/index.tsx)
 
-接下来我们还要实现高亮当前页面对应的导航的样式，首先我们需要把要高亮的 `Link` 组件添加上一个 `className`：
+**第 13 讲：转账和收款**：[教程](./13_Payment/readme.md) | [代码](./demo/pages/transaction/index.tsx)
 
-```diff
-import Link from "next/link";
-+ import { usePathname } from "next/navigation";
-import { ConnectButton } from "@ant-design/web3";
-import styles from "./styles.module.css";
+**第 14 讲：合约本地开发和测试环境**：[教程](./14_LocalDev/readme.md) | [代码](./demo-contract)
 
-export default function WtfHeader() {
-+  const pathname = usePathname();
-+  const isSwapPage = pathname === "/wtfswap";
+## DEX 开发实战（开发中）
 
-  return (
-    <div className={styles.header}>
-      <div className={styles.title}>WTFSwap</div>
-      <div className={styles.nav}>
-        <Link
-          href="/wtfswap"
-+          className={isSwapPage ? styles.active : undefined}
-        >
-          Swap
-        </Link>
-        <Link
-          href="/wtfswap/pool"
-+          className={!isSwapPage ? styles.active : undefined}
-        >
-          Pool
-        </Link>
-      </div>
-      <div>
-        <ConnectButton type="text" />
-      </div>
-    </div>
-  );
-}
-```
+**第 P000 讲：为什么要做这个实战课程**：[教程](./P000_WhyDEX/readme.md)
 
-然后添加相关样式：
+**第 P001 讲：什么是去中心化交易所（DEX）**：[教程](./P001_WhatIsDEX/readme.md)
 
-```css
-.nav a.active {
-  font-weight: bold;
-  opacity: 1;
-}
-```
+**第 P002 讲：Uniswap 代码解析**：[教程](./P002_WhatIsUniswap/readme.md)
 
-至此，布局头部的 UI 样式我们就完成了。
+**第 P003 讲：Wtfswap 整体设计**：[教程](./P003_OverallDesign/readme.md)
+
+
+
+**第 P102 讲：初始化合约和开发环境**：[教程](./P102_InitContracts/readme.md) | [代码](./P102_InitContracts/code/)
+
+**第 P103 讲：Pool 合约 LP 相关接口开发**
+
+**第 P104 讲：Factory 合约开发**
+
+**第 P105 讲：PoolManager 合约开发**
+
+**第 P106 讲：PositionManager 合约开发**
+
+**第 P107 讲：Pool 合约 swap 接口开发**
+
+**第 P108 讲：SwapRouter 合约开发**
+
+**第 P201 讲：初始化前端代码和技术分析**：[教程](./P201_InitFrontend/readme.md) | [代码](./P201_InitFrontend/code/)
+
+**第 P202 讲：头部 UI 开发**：[教程](./P202_HeadUI/readme.md) | [代码](./P202_HeadUI/code/)
+
+**第 P203 讲：支持连接链**：[教程](./P203_Connect/) | [代码](./P203_Connect/code/)
+
+**第 P204 讲：Swap 页面 UI 开发**
+
+**第 P206 讲：Pool 页面 UI 开发**
+
+**第 P207 讲：添加流动性弹窗 UI 开发**
+
+**第 P208 讲：支持添加流动性**
+
+**第 P209 讲：支持查看流动性**
+
+**第 P210 讲：支持提取流动性**
+
+**第 P211 讲：支持 Swap**
+
+**第 P301 讲：Wtfswap 部署**
