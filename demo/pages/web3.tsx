@@ -4,6 +4,7 @@ import {
   MetaMask,
   Goerli,
   Polygon,
+  Hardhat,
   WalletConnect,
 } from "@ant-design/web3-wagmi";
 import {
@@ -141,7 +142,7 @@ const CallTest = () => {
               address: contractInfo.find((item) => item.id === chain?.id)
                 ?.contractAddress as `0x${string}`,
               functionName: "mint",
-              args: [1],
+              args: [BigInt(1)],
               value: parseEther("0.01"),
             },
             {
@@ -169,15 +170,7 @@ export default function Web3() {
       eip6963={{
         autoAddInjectedWallets: true,
       }}
-      chains={[
-        Goerli,
-        Polygon,
-        {
-          ...Goerli,
-          name: "Hardhat",
-          id: hardhat.id,
-        },
-      ]}
+      chains={[Goerli, Polygon, Hardhat]}
     >
       <Address format address="0xEcd0D12E21805803f70de03B72B1C162dB0898d9" />
       <NFTCard
