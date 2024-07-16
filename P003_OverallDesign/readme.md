@@ -1,38 +1,83 @@
-在上面的几讲中我们大概介绍了 DEX，分析了我们大概要做什么，以及参考了 Uniswap 的合约代码。那这一讲我们开始设计 Wtfswap 的整体功能，我们会设计一个类似 Uniswap 但是又部分区别于它的功能，会做一些简化调整，用于课程开发练习。
+# WTF-Dapp
 
----
+WTF Dapp 是一个 DApp 极简入门教程，帮助开发者入门去中心应用开发。
 
-我们在上一讲[《Uniswap 代码解析》](../P002_WhatIsUniswap/)中分析了 Uniswap V3 的代码，也简单提到了 Uniswap V2。Wtfswap 将会基于 Uniswap V2 并吸收部分 Uniswap V3 的概念，设计一个新的 DEX。
+## 基础
 
-首先我们先回顾一下 Uniswap V2 和 Uniswap V3 的差异，在 V2 和 V3 中，一个代币对和费率唯一确定了一个交易池，在 V2 中，LP 向这样一个池子中注入流动性，价格可以在正无穷到负无穷之间波动。V3 相比 V2 最大的差异就是在 LP 注入流动性时可以定义一个价格区间，让 LP 可以提升自身的资金利用率。但是这样会导致 V3 交易的逻辑更复杂，因为一个池子里面可能包含了不同价格区间的流动性，交易的逻辑会更复杂。
+**第 1 讲：快速开始（三分钟展示 NFT）**：[教程](./01_QuickStart/readme.md) | [代码](./01_QuickStart/web3.tsx)
 
-在 Wtfswap 的设计中，我们也会引入价格区间，作为相比 V2 新增的功能，但是我们将不同的价格区间的流动性放到不同的池子中，用来降低复杂度。这样我们的交易逻辑会更简单，但是需要说明的是这样也会让流动性更分散，这也是为什么 V3 不这么做的原因。
+**第 2 讲：节点服务**：[教程](./02_NodeService/readme.md) | [代码](./02_NodeService/web3.tsx)
 
-另外为了为了课程更好上手，对于 Wtfswap 来说，整体设计相比 Uniswap V2 和 V3 我们会做如下的设计：
+**第 3 讲：连接钱包**：[教程](./03_ConnectWallet/readme.md) | [代码](./03_ConnectWallet/web3.tsx)
 
-- 简化功能，不支持部分添加和提取流动性，不支持和原生代币交易，不支持跨交易对交易。
-- 一个代币对+费率+价格区间唯一确定一个交易池，相比 Uniswap 来说我们针对交易池新增了价格区间的信息。
-- 一个代币对下可能会有多个交易池，交易池的费率和价格区间都可以灵活设置，选择在哪些交易池中交易由 DApp 前端通过流动性情况选择。
-- 直接调用合约获取当前可供交易的交易池，使得 DApp 不依赖于服务端（在 Uniswap 自己的 DApp 实现会涉及到一些服务端的接口）。
+**第 4 讲：调用合约**：[教程](./04_CallContract/readme.md) | [代码](./04_CallContract/web3.tsx)
 
-另外，我们基于 [Ant Design](https://ant.design/) 和 [Ant Design Web3](https://web3.ant.design/) 设计了一套 UI，我们除了合约开发外也会介绍如何开发前端界面。
+**第 5 讲：监听事件**：[教程](./05_Events/readme.md) | [代码](./05_Events/web3.tsx)
 
-基于 Wtfswap 的功能，我们设计了大概如下三个部分的 UI 界面。
+**第 6 讲：Next.js 部署**：[教程](./06_NextJS/readme.md)
 
-Swap 页面，用于交易代币：
+**第 7 讲：合约开发和测试**：[教程](./07_ContractDev/readme.md) | [代码](./07_ContractDev/MyToken.sol)
 
-![swap](./img/swap.png)
+**第 8 讲：合约部署**：[教程](./08_ContractDeploy/readme.md) | [代码](./08_ContractDeploy/demo/dapp.tsx)
 
-Pool 页面，用于查看当前已经有的交易池：
+## 进阶
 
-![pool](./img/pool.png)
+**第 9 讲：EIP1193 和 EIP6963**：[教程](./09_EIP1193/readme.md) | [代码](./09_EIP1193/web3.tsx)
 
-Positions 页面，用于查看和移除流动性：
+**第 10 讲：通过 WalletConnect 连接移动端钱包**：[教程](./10_WalletConnect/readme.md) | [代码](./10_WalletConnect/web3.tsx)
 
-![pool](./img/positions.png)
+**第 11 讲：支持多链**：[教程](./11_MultipleChain/readme.md) | [代码](./11_MultipleChain/web3.tsx)
 
-Positions 页面创建流动性弹窗，用于创建新的流动性（如果没有对应的交易池，会先创建交易池）：
+**第 12 讲：签名和验签**：[教程](./12_Signature/readme.md) | [代码](./demo/pages/sign/index.tsx)
 
-![add](./img/add.png)
+**第 13 讲：转账和收款**：[教程](./13_Payment/readme.md) | [代码](./demo/pages/transaction/index.tsx)
 
-在后面的部分我们将会把课程分开为两个部分，第一个是以 P1 开头的合约部分课程，另外一个是以 P2 开头的前端部分课程。你可以根据自己的需求选择学习。
+**第 14 讲：合约本地开发和测试环境**：[教程](./14_LocalDev/readme.md) | [代码](./demo-contract)
+
+## DEX 开发实战（开发中）
+
+**第 P000 讲：为什么要做这个实战课程**：[教程](./P000_WhyDEX/readme.md)
+
+**第 P001 讲：什么是去中心化交易所（DEX）**：[教程](./P001_WhatIsDEX/readme.md)
+
+**第 P002 讲：Uniswap 代码解析**：[教程](./P002_WhatIsUniswap/readme.md)
+
+**第 P003 讲：Wtfswap 整体设计**：[教程](./P003_OverallDesign/readme.md)
+
+
+
+**第 P102 讲：初始化合约和开发环境**：[教程](./P102_InitContracts/readme.md) | [代码](./P102_InitContracts/code/)
+
+**第 P103 讲：Pool 合约 LP 相关接口开发**
+
+**第 P104 讲：Factory 合约开发**
+
+**第 P105 讲：PoolManager 合约开发**
+
+**第 P106 讲：PositionManager 合约开发**
+
+**第 P107 讲：Pool 合约 swap 接口开发**
+
+**第 P108 讲：SwapRouter 合约开发**
+
+**第 P201 讲：初始化前端代码和技术分析**：[教程](./P201_InitFrontend/readme.md) | [代码](./P201_InitFrontend/code/)
+
+**第 P202 讲：头部 UI 开发**：[教程](./P202_HeadUI/readme.md) | [代码](./P202_HeadUI/code/)
+
+**第 P203 讲：支持连接链**：[教程](./P203_Connect/) | [代码](./P203_Connect/code/)
+
+**第 P204 讲：Swap 页面 UI 开发**
+
+**第 P206 讲：Pool 页面 UI 开发**
+
+**第 P207 讲：添加流动性弹窗 UI 开发**
+
+**第 P208 讲：支持添加流动性**
+
+**第 P209 讲：支持查看流动性**
+
+**第 P210 讲：支持提取流动性**
+
+**第 P211 讲：支持 Swap**
+
+**第 P301 讲：Wtfswap 部署**
