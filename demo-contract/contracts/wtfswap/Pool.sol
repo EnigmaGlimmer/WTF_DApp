@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
-pragma solidity >=0.7.5;
+pragma solidity ^0.8.24;
 
 import "./interfaces/IPool.sol";
 
@@ -32,9 +32,9 @@ contract Pool is IPool {
     {}
 
     function initialize(
-        uint160 sqrtPriceX96,
-        int24 tickLower,
-        int24 tickUpper
+        uint160 sqrtPriceX96_,
+        int24 tickLower_,
+        int24 tickUpper_
     ) external override {}
 
     function mint(

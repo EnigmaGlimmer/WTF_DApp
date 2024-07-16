@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
-pragma solidity >=0.7.5;
+pragma solidity ^0.8.24;
 pragma abicoder v2;
 
 interface ISwapRouter {
     struct ExactInputParams {
         address tokenIn;
         address tokenOut;
+        uint32[] indexPath;
         address recipient;
         uint256 deadline;
         uint256 amountIn;
@@ -20,6 +21,7 @@ interface ISwapRouter {
     struct ExactOutputParams {
         address tokenIn;
         address tokenOut;
+        uint32[] indexPath;
         address recipient;
         uint256 deadline;
         uint256 amountOut;
@@ -34,6 +36,7 @@ interface ISwapRouter {
     struct QuoteExactInputParams {
         address tokenIn;
         address tokenOut;
+        uint32[] indexPath;
         uint256 amountIn;
         uint160 sqrtPriceLimitX96;
     }
@@ -45,6 +48,7 @@ interface ISwapRouter {
     struct QuoteExactOutputParams {
         address tokenIn;
         address tokenOut;
+        uint32[] indexPath;
         uint256 amount;
         uint160 sqrtPriceLimitX96;
     }
