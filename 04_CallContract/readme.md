@@ -60,7 +60,7 @@ await getAccount(); // 你的账户地址
 2. 通过唤起钱包授权将交易数据添加签名
 3. 将签名后的交易数据通过节点服务发送到区块链网络
 
-> 注：对于调用只读接口调用时，因为不需要向区块链写入数据，所以也不需要对交易签名，可以直接通过节点服务读取到链上数据。
+> 注：调用只读接口时，因为不需要向区块链写入数据，所以也不需要对交易签名，可以直接通过节点服务读取到链上数据。
 
 ### 读的方式调用合约方法
 
@@ -153,6 +153,7 @@ export default function Web3() {
 const CallTest = () => {
 
 // ...
++ const { writeContract } = useWriteContract();
 
   return (
     <div>
@@ -178,7 +179,7 @@ const CallTest = () => {
 +              ],
 +              address: "0xEcd0D12E21805803f70de03B72B1C162dB0898d9",
 +              functionName: "mint",
-+              args: [1],
++              args: [BigInt(1)],
 +              value: parseEther("0.01"),
 +            },
 +            {
