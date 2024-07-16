@@ -1,37 +1,83 @@
-这一讲我们会设计好所有的合约，定义好它们的接口，在具体的实现之前做好整体的架构设计。
+# WTF-Dapp
 
----
+WTF Dapp 是一个 DApp 极简入门教程，帮助开发者入门去中心应用开发。
 
-## 概要
+## 基础
 
-结合上一讲的内容，我们仅保留核心的功能，让课程更简单。我们会参考 Uniswap 的整体架构，但是不会将合约在分开在两个项目中。我们将实现如下合约：
+**第 1 讲：快速开始（三分钟展示 NFT）**：[教程](./01_QuickStart/readme.md) | [代码](./01_QuickStart/web3.tsx)
 
-- `SwapRouter.sol`：交易，对应 [SwapRouter.sol](https://github.com/Uniswap/v3-periphery/blob/main/contracts/SwapRouter.sol)。
-- `LiquidityManagement.sol`：管理流动性，对应 [LiquidityManagement.sol](https://github.com/Uniswap/v3-periphery/blob/main/contracts/base/LiquidityManagement.sol)。
-- core
-  - `WtfswapPool.sol`：交易池，对应 [UniswapV3Pool.sol](https://github.com/Uniswap/v3-core/blob/main/contracts/UniswapV3Pool.sol)。
-  - `WtfswapPoolFactory`：交易池的工厂合约，对应 [UniswapV3Factory.sol](https://github.com/Uniswap/v3-core/blob/main/contracts/UniswapV3Factory.sol)。
+**第 2 讲：节点服务**：[教程](./02_NodeService/readme.md) | [代码](./02_NodeService/web3.tsx)
 
-其中 `SwapRouter.sol` 是普通用户交易时需要调用的合约，该合约会找到对应的交易池交易。`LiquidityManagement.sol` 是 LP 管理流动性时需要调用的合约。这两者都依赖 core 下面的两个交易池相关合约。接下来我们继续设计这些合约具体的接口。
+**第 3 讲：连接钱包**：[教程](./03_ConnectWallet/readme.md) | [代码](./03_ConnectWallet/web3.tsx)
 
-## 接口设计
+**第 4 讲：调用合约**：[教程](./04_CallContract/readme.md) | [代码](./04_CallContract/web3.tsx)
 
-### SwapRouter.sol
+**第 5 讲：监听事件**：[教程](./05_Events/readme.md) | [代码](./05_Events/web3.tsx)
 
-TODO
+**第 6 讲：Next.js 部署**：[教程](./06_NextJS/readme.md)
 
-### LiquidityManagement.sol
+**第 7 讲：合约开发和测试**：[教程](./07_ContractDev/readme.md) | [代码](./07_ContractDev/MyToken.sol)
 
-TODO
+**第 8 讲：合约部署**：[教程](./08_ContractDeploy/readme.md) | [代码](./08_ContractDeploy/demo/dapp.tsx)
 
-### WtfswapPool.sol
+## 进阶
 
-TODO
+**第 9 讲：EIP1193 和 EIP6963**：[教程](./09_EIP1193/readme.md) | [代码](./09_EIP1193/web3.tsx)
 
-### WtfswapPoolFactory
+**第 10 讲：通过 WalletConnect 连接移动端钱包**：[教程](./10_WalletConnect/readme.md) | [代码](./10_WalletConnect/web3.tsx)
 
-TODO
+**第 11 讲：支持多链**：[教程](./11_MultipleChain/readme.md) | [代码](./11_MultipleChain/web3.tsx)
 
-## 初始化合约
+**第 12 讲：签名和验签**：[教程](./12_Signature/readme.md) | [代码](./demo/pages/sign/index.tsx)
 
-我们参考之前的课程[合约本地开发和测试环境](./LocalDev/readme.md)来初始化合约工程，并结合上面的设计初始化合约的接口。
+**第 13 讲：转账和收款**：[教程](./13_Payment/readme.md) | [代码](./demo/pages/transaction/index.tsx)
+
+**第 14 讲：合约本地开发和测试环境**：[教程](./14_LocalDev/readme.md) | [代码](./demo-contract)
+
+## DEX 开发实战（开发中）
+
+**第 P000 讲：为什么要做这个实战课程**：[教程](./P000_WhyDEX/readme.md)
+
+**第 P001 讲：什么是去中心化交易所（DEX）**：[教程](./P001_WhatIsDEX/readme.md)
+
+**第 P002 讲：Uniswap 代码解析**：[教程](./P002_WhatIsUniswap/readme.md)
+
+**第 P003 讲：Wtfswap 整体设计**：[教程](./P003_OverallDesign/readme.md)
+
+
+
+**第 P102 讲：初始化合约和开发环境**：[教程](./P102_InitContracts/readme.md) | [代码](./P102_InitContracts/code/)
+
+**第 P103 讲：Pool 合约 LP 相关接口开发**
+
+**第 P104 讲：Factory 合约开发**
+
+**第 P105 讲：PoolManager 合约开发**
+
+**第 P106 讲：PositionManager 合约开发**
+
+**第 P107 讲：Pool 合约 swap 接口开发**
+
+**第 P108 讲：SwapRouter 合约开发**
+
+**第 P201 讲：初始化前端代码和技术分析**：[教程](./P201_InitFrontend/readme.md) | [代码](./P201_InitFrontend/code/)
+
+**第 P202 讲：头部 UI 开发**：[教程](./P202_HeadUI/readme.md) | [代码](./P202_HeadUI/code/)
+
+**第 P203 讲：支持连接链**：[教程](./P203_Connect/) | [代码](./P203_Connect/code/)
+
+**第 P204 讲：Swap 页面 UI 开发**
+
+**第 P206 讲：Pool 页面 UI 开发**
+
+**第 P207 讲：添加流动性弹窗 UI 开发**
+
+**第 P208 讲：支持添加流动性**
+
+**第 P209 讲：支持查看流动性**
+
+**第 P210 讲：支持提取流动性**
+
+**第 P211 讲：支持 Swap**
+
+**第 P301 讲：Wtfswap 部署**
