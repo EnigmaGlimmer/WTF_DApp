@@ -12,7 +12,13 @@ import {
 } from "@ant-design/web3-wagmi";
 import { Button, message } from "antd";
 import { parseEther } from "viem";
-import { createConfig, http, useReadContract, useWriteContract } from "wagmi";
+import {
+  createConfig,
+  http,
+  useReadContract,
+  useWriteContract,
+  useWatchContractEvent,
+} from "wagmi";
 import { mainnet } from "wagmi/chains";
 import { injected, walletConnect } from "wagmi/connectors";
 
@@ -50,6 +56,35 @@ const CallTest = () => {
     args: [account?.address as `0x${string}`],
   });
   const { writeContract } = useWriteContract();
+
+  useWatchContractEvent({
+    address: "0xEcd0D12E21805803f70de03B72B1C162dB0898d9",
+    abi: [
+      {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: false,
+            internalType: "address",
+            name: "minter",
+            type: "address",
+          },
+          {
+            indexed: false,
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+        ],
+        name: "Minted",
+        type: "event",
+      },
+    ],
+    eventName: "Minted",
+    onLogs() {
+      message.success("new minted!");
+    },
+  });
 
   return (
     <div>
@@ -100,6 +135,9 @@ export default function Web3() {
     <WagmiWeb3ConfigProvider
       config={config}
       wallets={[MetaMask(), WalletConnect()]}
+      eip6963={{
+        autoAddInjectedWallets: true,
+      }}
     >
       <Address format address="0xEcd0D12E21805803f70de03B72B1C162dB0898d9" />
       <NFTCard
